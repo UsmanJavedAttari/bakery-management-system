@@ -1,0 +1,105 @@
+@import 'classes/variables.scss';
+@import 'classes/border.scss';
+@import 'classes/height-width.scss';
+@import 'classes/position.scss';
+
+* {
+  font-family: $body-font-family, sans-serif !important;
+}
+
+a {
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+}
+
+// Flex: 1, auto; classes
+@each $f in auto, 1, 0 {
+  .flex-#{$f} {
+    flex: $f !important;
+  }
+}
+
+.justify-space-evenly {
+  justify-content: space-evenly !important;
+}
+
+// Oberflow classes
+@each $os in 'x', 'y', 'a' {
+  @each $ov in scroll, hidden, auto {
+    @if $os == 'a' {
+      .overflow-#{$ov} {
+        overflow: $ov !important;
+      }
+    } @else {
+      .overflow-#{$os}-#{$ov} {
+        overflow-#{$os}: $ov !important;
+      }
+    }
+  }
+}
+
+// Cursor classes
+@each $c in pointer, default {
+  .cursor-#{$c} {
+    cursor: $c !important;
+  }
+}
+
+// Position classes
+@each $p in absolute, relative, fixed {
+  .p-#{$p} {
+    position: $p !important;
+  }
+}
+
+.disabled {
+  color: grey !important;
+  pointer-events: none;
+}
+
+.hoverable {
+  transition: all 0.15s ease-in-out;
+  &:hover {
+    background: #eee !important;
+  }
+}
+/* app styles */
+.no-decoration {
+  text-decoration: none;
+}
+a.underline {
+  text-decoration: none;
+}
+a.underline:hover {
+  text-decoration: underline;
+}
+
+.big-shadow {
+  box-shadow: 0 0 10px rgba($secondary, 0.5) !important;
+}
+
+.sticky-bar {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.disabled {
+  color: grey !important;
+  pointer-events: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+.no-select {
+  pointer-events: none;
+  user-select: none;
+}

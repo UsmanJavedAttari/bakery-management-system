@@ -1,0 +1,24 @@
+{
+  "Vue Typescript Component Snippet": {
+    "scope": "javascript,typescript",
+    "prefix": "vc",
+    "body": [
+      "import VueWrapper from '@/components/core/Vue/vue.wrapper';",
+      "import { Component } from 'vue-property-decorator';\n",
+      "@Component",
+      "export default class ${1:Name}Component extends VueWrapper {}"
+    ],
+    "description": "Makes vue class component."
+  },
+  "Vue HTML Component Snippet": {
+    "scope": "vue",
+    "prefix": "vc",
+    "body": [
+      "<template>",
+      "  <div>${1}</div>",
+      "</template>\n",
+      "<script lang=\"ts\" src=\"./${TM_FILENAME_BASE}.ts\" />\n"
+    ],
+    "description": "Makes vue class component."
+  }
+}
