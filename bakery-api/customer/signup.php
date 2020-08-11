@@ -31,11 +31,11 @@ if (
   $customer->Id = guidv4();
   $paymentaccount->PaymentCardNumber = $data->PaymentCardNumber;
   $paymentaccount->CustomerId = $customer->Id;
-  if ($paymentaccount->create()) {
-    $customer->DisplayName = $data->DisplayName;
-    $customer->Email = $data->Email;
-    $customer->Password = $data->Password;
-    if ($customer->create()) {
+  $customer->DisplayName = $data->DisplayName;
+  $customer->Email = $data->Email;
+  $customer->Password = $data->Password;
+  if ($customer->create()) {
+    if ($paymentaccount->create()) {
       $cart->Id = guidv4();
       $cart->NumberOfItems = 0;
       $cart->TotalCost = 0;
@@ -52,14 +52,14 @@ if (
         return;
       }
     } else {
-      $paymentaccount->delete($paymentaccount->PaymentCardNumber);
+      $customer->delete($customer->Id);
       http_response_code(409);
-      echo json_encode(array("Message" => "Email already exists.", "Status" => false, "Data" => NULL));
+        echo json_encode(array("Message" => "Payment account already exists.", "Status" => false, "Data" => NULL));
       return;
     }
   } else {
     http_response_code(409);
-      echo json_encode(array("Message" => "Payment account already exists.", "Status" => false, "Data" => NULL));
+    echo json_encode(array("Message" => "Email already exists.", "Status" => false, "Data" => NULL));
     return;
   }
 } else {

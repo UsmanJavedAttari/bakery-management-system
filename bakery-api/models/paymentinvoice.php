@@ -18,7 +18,7 @@ class PaymentInvoice {
 
   public function findByOrderId($orderId) {
     // Select all query
-    $query = "SELECT *, SUBSTRING(Id, 1, 8) as ShortId FROM {$this->table_name} WHERE OrderId = ?";
+    $query = "SELECT *, SUBSTRING(Id, 1, 8) as ShortId FROM {$this->table_name} WHERE OrderId = ? ORDER BY GeneratedAt DESC";
     // Prepare query statement
     $stmt = $this->conn->prepare($query);
     
@@ -47,7 +47,7 @@ class PaymentInvoice {
     $this->OrderId=htmlspecialchars(strip_tags($this->OrderId));
     $this->AmountCharged=htmlspecialchars(strip_tags($this->AmountCharged));
     $this->PaymentCardNumber=htmlspecialchars(strip_tags($this->PaymentCardNumber));
-    $this->GeneratedAt = date('Y-m-d H:i:s');
+    $this->GeneratedAt = (new DateTime('now', new DateTimeZone('Asia/Karachi')))->format('Y-m-d H:i:s');
   
     // bind values
     $stmt->bindParam(":Id", $this->Id);

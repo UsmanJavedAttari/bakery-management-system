@@ -15,9 +15,15 @@
               </span>
             </div>
             <div class="d-flex align-center">
-              <v-icon @click.stop="CartItemService.addToCart(item.Product.Id)">mdi-plus</v-icon>
+              <v-icon
+                @click.stop="CartItemService.addToCart(item.Product.Id)"
+                :disabled="+item.Product.Quantity < 1"
+              >mdi-plus</v-icon>
               <h3 class="mx-2 no-select">{{ item.Quantity }}</h3>
-              <v-icon @click.stop="CartItemService.addToCart(item.Product.Id, true)">mdi-minus</v-icon>
+              <v-icon
+                @click.stop="CartItemService.addToCart(item.Product.Id, true)"
+                :disabled="+item.Quantity < 2"
+              >mdi-minus</v-icon>
             </div>
             <base-btn text color="white" @click="CartItemService.removeItem(item.Product.Id)">
               <v-icon>mdi-delete-outline</v-icon>Remove

@@ -4,7 +4,7 @@
       <v-card class="big-shadow round-15 pa-5 p-relative">
         <h1>
           Hi
-          <span class="font-weight-bold primary--text">Usman Javed!</span>
+          <span class="font-weight-bold primary--text">{{ DisplayName }}!</span>
         </h1>
         <base-form #default="{ invalid }" @submit="updateProfile">
           <v-row dense>
@@ -35,7 +35,11 @@
       <v-card class="big-shadow round-15 pa-5 pb-0">
         <h1 class="font-weight-bold primary--text">Payment Cards</h1>
         <v-list dense nav class="pa-0 mb-3">
-          <v-list-item link v-for="(account, i) in PaymentAccounts" :key="i">
+          <v-list-item
+            link v-for="(account, i) in PaymentAccounts"
+            :key="i"
+            v-ripple="{ class: `primary--text` }"
+          >
             <v-list-item-action class="ma-0 mr-3">
               <v-icon color="primary">mdi-id-card</v-icon>
             </v-list-item-action>

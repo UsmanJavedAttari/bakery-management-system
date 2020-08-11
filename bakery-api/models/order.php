@@ -15,7 +15,7 @@ class Order {
   }
 
   public function findByCustomerId($customerId) {
-    $query = "SELECT * FROM `{$this->table_name}` WHERE CustomerId = ?";
+    $query = "SELECT * FROM `{$this->table_name}` WHERE CustomerId = ? ORDER BY CreatedAt DESC";
     // Prepare query statement
     $stmt = $this->conn->prepare($query);
 
@@ -30,7 +30,7 @@ class Order {
 
   public function read() {
     // Select all query
-    $query = "SELECT * FROM {$this->table_name} WHERE CustomerId = ?";
+    $query = "SELECT * FROM {$this->table_name} WHERE CustomerId = ? ORDER BY CreatedAt DESC";
     // Prepare query statement
     $stmt = $this->conn->prepare($query);
     
@@ -55,7 +55,7 @@ class Order {
     // sanitize
     $this->Id=htmlspecialchars(strip_tags($this->Id));
     $this->CustomerId=htmlspecialchars(strip_tags($this->CustomerId));
-    $this->CreatedAt = date('Y-m-d H:i:s');
+    $this->CreatedAt = (new DateTime('now', new DateTimeZone('Asia/Karachi')))->format('Y-m-d H:i:s');
     // bind values
     $stmt->bindParam(":Id", $this->Id);
     $stmt->bindParam(":CustomerId", $this->CustomerId);
